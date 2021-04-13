@@ -1,6 +1,10 @@
-    //println("Hello Word")
-
     fun main() {
-        val name = readLine()
-        println("Hello, $name")
+        var x: Int = readLine()!!.toInt()
+        var sum = 0
+        while (x != 0)
+        {
+            sum += x % 10
+            x /= 10
+        }
+        println(sum)
     }
