@@ -1,10 +1,40 @@
-fun sumNumbers3(x: Int): Int = sumNumbers3(x,0)
-fun sumNumbers3(x: Int, sum: Int ): Int = if (x < 10) (if (x % 10 % 3 == 0) sum + x % 10 else sum) else (if (x % 10 % 3 == 0) sumNumbers3(x/10,sum + x % 10)
-    else sumNumbers3(x/10,sum))
+//Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
+fun vzSimpleNumbers(x: Int, y: Int): Boolean
+{
+    if (x == 1) return true
+    if (y % x == 0) return false
+    for (i in 2..(x/2 + 1))
+        if (y % i == 0 && x % i == 0)
+            return false
+    return true
+}
 
-fun main() {
-    val kol: Int
-    val x = readLine()!!.toInt()
-    kol = sumNumbers3(x)
-    println(kol)
+tailrec fun kolVpSimpleNumbers(x: Int, y: Int, counter: Int): Int = if (x == 0) counter else
+    ( if (vzSimpleNumbers(x % 10,y))
+                 { val counter1 = 1 + counter
+                     kolVpSimpleNumbers(x/10, y, counter1)
+                 }
+                else kolVpSimpleNumbers(x/10, y, counter)
+            )
+
+fun foundDel(x: Int): Int {
+    var maxKol = 0
+    var del = 1
+    for (i in 1..(x/2 + 1))
+    {
+        if (x % i == 0)
+        {
+            if (maxKol > kolVpSimpleNumbers(x, i,0))
+                maxKol = kolVpSimpleNumbers(x, i,0)
+            del = i
+        }
+    }
+    return del
+}
+
+fun main()
+{
+       val x = readLine()!!.toInt()
+    val del = foundDel(x)
+    println(del)
 }
