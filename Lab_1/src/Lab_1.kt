@@ -1,34 +1,22 @@
-fun sumNumber(x: Int) : Int
+fun vzSimpleNumbers(x: Int, y: Int): Boolean
 {
-    var n = x
-    var sum = 0
-    while (n != 0)
-    {
-        sum += n % 10
-        n /= 10
-    }
-    return sum
-}
-fun prNumber(x: Int) : Int
-{
-    var n = x
-    var composition = 0
-    while (n != 0)
-    {
-        composition *= n % 10
-        n /= 10
-    }
-    return composition
+    if (y % x == 0) return false
+    for (i in 2..(x/2 + 1))
+        if (y % i == 0 && x % i == 0)
+            return false
+    return true
 }
 
-fun max(num:Int): Int = if (num < 10) num else if (num % 10 > max(num/10)) num % 10 else max(num/10)
-
-fun min(num:Int): Int = if (num < 10) num else if (num % 10 < min(num/10)) num % 10 else min(num/10)
-
+fun kolVzSimpleNumbers(x: Int): Int
+{
+    var counter = 0
+    for (i in 1..100)
+        if (vzSimpleNumbers(x,i)) ++counter
+    return counter
+}
 fun main() {
-    val sum: Int = readLine()!!.toInt()
-    val max: Int = max(sum)
-    val min: Int = min(sum)
-    println("max = $max")
-    println("min = $min")
+    val kol: Int
+    val x = readLine()!!.toInt()
+    kol = kolVzSimpleNumbers(x)
+    println(kol)
 }
