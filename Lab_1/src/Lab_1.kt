@@ -1,22 +1,10 @@
-fun vzSimpleNumbers(x: Int, y: Int): Boolean
-{
-    if (y % x == 0) return false
-    for (i in 2..(x/2 + 1))
-        if (y % i == 0 && x % i == 0)
-            return false
-    return true
-}
+fun sumNumbers3(x: Int): Int = sumNumbers3(x,0)
+fun sumNumbers3(x: Int, sum: Int ): Int = if (x < 10) (if (x % 10 % 3 == 0) sum + x % 10 else sum) else (if (x % 10 % 3 == 0) sumNumbers3(x/10,sum + x % 10)
+    else sumNumbers3(x/10,sum))
 
-fun kolVzSimpleNumbers(x: Int): Int
-{
-    var counter = 0
-    for (i in 1..100)
-        if (vzSimpleNumbers(x,i)) ++counter
-    return counter
-}
 fun main() {
     val kol: Int
     val x = readLine()!!.toInt()
-    kol = kolVzSimpleNumbers(x)
+    kol = sumNumbers3(x)
     println(kol)
 }
