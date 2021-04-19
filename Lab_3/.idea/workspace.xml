@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e16d49f8-7ad2-4caa-9689-af2ef8544c8b" name="Default Changelist" comment="" />
+    <list default="true" id="c242790c-c663-4df7-959d-d37082a44417" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1rGZA3yqzZS9qlkq0bg66K2sVGt" />
+  <component name="ProjectId" id="1rIDoCpE6HaWpf6tC9rmqmmtii2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,17 +26,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Новая папка" />
   </component>
   <component name="RunManager">
-    <configuration name="Lab_2Kt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="Лаба_2" />
+    <configuration name="Lab_3Kt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Lab3" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Lab_2Kt" />
+      <option name="MAIN_CLASS_NAME" value="Lab_3Kt" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -44,18 +44,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Lab_2Kt" />
+        <item itemvalue="Application.Lab_3Kt" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e16d49f8-7ad2-4caa-9689-af2ef8544c8b" name="Default Changelist" comment="" />
-      <created>1618604244194</created>
+      <changelist id="c242790c-c663-4df7-959d-d37082a44417" name="Default Changelist" comment="" />
+      <created>1618654889564</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1618604244194</updated>
+      <updated>1618654889564</updated>
     </task>
     <servers />
   </component>

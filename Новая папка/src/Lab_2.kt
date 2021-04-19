@@ -33,10 +33,51 @@ fun min(num: Int) : Int = digitsDown(num, 9, {a,b -> if (a<b) a else b})
 fun maxChet(num: Int): Int = digitsDown(num, 0, {a, b -> if (a > b) a else b}, {x -> x % 2 == 0})
 fun del3(num: Int): Int = digitsDown(num, 1, {a, b -> a * b}, {x -> x % 3 == 0 && x > 4})
 fun pr(num: Int): Int = digitsDown(num, 0, {a, b -> a + b}, {x -> x % 2 == 0 && x <= 4})
+// ______________7______________
+//Mетод 1. Найти количество чисел, взаимно простых с заданным.
+fun vzSimpleNumbers(x: Int, y: Int): Boolean = if (y == 1) true else (if (x % y == 0) false else vzSimpleNumbers(x, y, x / 2 + 1, true))
+tailrec fun vzSimpleNumbers(x: Int, y: Int, counter: Int, result: Boolean): Boolean = if (counter  == 1) result else {
+    if (y % counter == 0 && x % counter == 0) {
+        val result1 = false
+        vzSimpleNumbers(x, y, counter - 1, result1)
+    }
+    else vzSimpleNumbers(x, y, counter - 1, result)
+}
+
+fun kolNumbersVzSimple(x: Int, y: Int) : Int = kolNumbersVzSimple(x, y, 0)
+fun kolNumbersVzSimple(x: Int, y: Int, counter: Int) : Int = if (y == 0) counter else {
+    if (vzSimpleNumbers(x, y))
+        kolNumbersVzSimple(x, y - 1, counter + 1) else
+            kolNumbersVzSimple(x, y - 1, counter)
+    }
+
+//Метод 2. Найти сумму цифр числа, делящихся на 3.
+fun sumNumbers3(x: Int): Int = sumNumbers3(x,0)
+tailrec fun sumNumbers3(x: Int, sum: Int ): Int = if (x < 10) (if (x % 10 % 3 == 0) sum + x % 10 else sum)
+        else (if (x % 10 % 3 == 0) sumNumbers3(x/10,sum + x % 10)
+else sumNumbers3(x/10,sum))
+
+//Метод 3. Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа
+fun kolVzN(x: Int, y: Int): Int = kolVzN(x, y, 0)
+tailrec fun kolVzN(x: Int, y: Int, counter: Int): Int = if (x == 0) counter else                        //количество взаимно простых цифр числа с заданным
+        (if (vzSimpleNumbers(x % 10, y)) kolVzN(x / 10, y, counter + 1) else
+            kolVzN(x / 10, y, counter))
+
+fun delNumders(x: Int): Int = delNumders(x, x / 2 + 1, x, kolVzN(x, x))
+tailrec fun delNumders(x: Int, counter: Int, del: Int, kolNumb: Int): Int = if (counter == 0) del else {
+    if (x % counter == 0)
+    {
+        if (kolVzN(x, counter, 0) > kolNumb)
+        delNumders(x, counter - 1, counter, kolVzN(x, counter)) else
+            delNumders(x, counter - 1, counter, kolNumb)
+    }
+    else
+        delNumders(x, counter - 1, del, kolNumb)
+}
+
 
 fun main() {
-    val num: Int = readLine()!!.toInt()
-    println("max = ${del3(num)}")
-    println("max = ${pr(num)}")
-
+    //val num: Int = readLine()!!.toInt()
+    //println("max = ${del3(num)}")
+    println(delNumders(12))
 }
