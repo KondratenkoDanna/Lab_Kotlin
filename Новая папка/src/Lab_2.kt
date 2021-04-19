@@ -1,3 +1,5 @@
+import java.lang.IllegalArgumentException
+
 // ______________1______________
 fun sumNumberUp(x: Int): Int = if (x == 0) x else sumNumberUp(x/10) + x%10
 // ______________2______________
@@ -64,7 +66,7 @@ tailrec fun kolVzN(x: Int, y: Int, counter: Int): Int = if (x == 0) counter else
             kolVzN(x / 10, y, counter))
 
 fun delNumders(x: Int): Int = delNumders(x, x / 2 + 1, x, kolVzN(x, x))
-tailrec fun delNumders(x: Int, counter: Int, del: Int, kolNumb: Int): Int = if (counter == 0) del else {
+tailrec fun delNumders(x: Int, counter: Int, del: Int, kolNumb: Int): Int = if (counter == 1) del else {    // 1 не включительно, потому что тогда везде будет 1
     if (x % counter == 0)
     {
         if (kolVzN(x, counter, 0) > kolNumb)
@@ -74,10 +76,16 @@ tailrec fun delNumders(x: Int, counter: Int, del: Int, kolNumb: Int): Int = if (
     else
         delNumders(x, counter - 1, del, kolNumb)
 }
-
+// ______________8______________
+fun or(s: Char): (Int, Int) -> Int = when (s) {
+    '+' -> {a: Int, b: Int -> a + b}
+    '-' -> {a: Int, b: Int -> a - b}
+    '*' -> {a: Int, b: Int -> a * b}
+    else -> throw IllegalArgumentException("Unknown operation")
+}
 
 fun main() {
     //val num: Int = readLine()!!.toInt()
     //println("max = ${del3(num)}")
-    println(delNumders(12))
+    println(or('+')(5,9))
 }
