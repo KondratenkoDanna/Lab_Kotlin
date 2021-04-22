@@ -84,8 +84,23 @@ fun or(s: Char): (Int, Int) -> Int = when (s) {
     else -> throw IllegalArgumentException("Unknown operation")
 }
 
+// ______________78______________ - Монетные перегородки
+fun splitN(n: Int): Int = splitN(n, n) // расщепление n
+fun splitN(n: Int, counter: Int): Int =
+    if (counter > n) splitN(n, n) else {
+
+        if (counter == 0) {
+            if (n == 0) 1 else 0
+        } else splitN(n, counter - 1) + splitN(n - counter, counter)
+    }
+
+fun delMillion(n: Int): Int = if (splitN(n) % 1000000 >= 1) n else delMillion(n + 1)
+
 fun main() {
     //val num: Int = readLine()!!.toInt()
-    //println("max = ${del3(num)}")
-    println(or('+')(5,9))
+    //val num2: Int = readLine()!!.toInt()
+    //val n = kolFoundelay(5,5,0)
+    println(splitN(20))
+    //println(kolFoundelay( 3))
+    //println(roundelay(readLine()!!.toInt(), readLine()!!.toInt()))
 }
