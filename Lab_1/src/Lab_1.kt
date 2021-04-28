@@ -1,15 +1,62 @@
 import kotlin.math.sqrt
+// _______________1_______________
+// println("Hello Word")
 
-//Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
-fun vzSimpleNumbers(x: Int, y: Int): Boolean
+// _______________3_______________
+// val name = readLine()
+// println("Hello, $name")
+
+// _______________5_______________
+
+// _______________6_______________
+    /*var x: Int = readLine()!!.toInt()
+    var sum = 0
+    while (x != 0)
+    {
+        sum += x % 10
+        x /= 10
+    }
+    println(sum)*/
+// _______________7_______________
+fun prNumber(x: Int) : Int
 {
-    if (x == 1) return true
+    var n = x
+    var composition = 0
+    while (n != 0)
+    {
+        composition *= n % 10
+        n /= 10
+    }
+    return composition
+}
+
+fun max(num:Int): Int = if (num < 10) num else if (num % 10 > max(num/10)) num % 10 else max(num/10)
+
+fun min(num:Int): Int = if (num < 10) num else if (num % 10 < min(num/10)) num % 10 else min(num/10)
+// _______________8.1_______________
+fun vzSimpleNumbers(x: Int, y: Int): Boolean {
     if (y % x == 0) return false
     for (i in 2..(x/2 + 1))
         if (y % i == 0 && x % i == 0)
             return false
     return true
 }
+
+fun kolVzSimpleNumbers(x: Int): Int
+{
+    var counter = 0
+    for (i in 1..100)
+        if (vzSimpleNumbers(x,i) == true) ++counter
+    return counter
+}
+// _______________8.2_______________
+fun sumNumbers3(x: Int): Int = sumNumbers3(x,0)
+fun sumNumbers3(x: Int, sum: Int ): Int = if (x < 10) (if (x % 10 % 3 == 0) sum + x % 10 else sum) else (if (x % 10 % 3 == 0) sumNumbers3(x/10,sum + x % 10)
+else sumNumbers3(x/10,sum))
+
+// _______________8.3_______________
+//Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
+
 
 tailrec fun kolVpSimpleNumbers(x: Int, y: Int, counter: Int): Int = if (x == 0) counter else
     ( if (vzSimpleNumbers(x % 10,y))
