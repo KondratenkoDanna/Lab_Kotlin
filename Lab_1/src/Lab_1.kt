@@ -125,7 +125,5 @@ tailrec fun sumTwoMillionSimpleNumbers(a: Array<Boolean>, counter: Int, sum: Lon
 
 fun main()
 {
-       val x = readLine()!!.toInt()
-    val del = foundDel(x)
-    println(del)
+       println("Hello, world")
 }
