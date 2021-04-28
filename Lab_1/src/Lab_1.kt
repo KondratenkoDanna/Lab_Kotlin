@@ -1,3 +1,5 @@
+import kotlin.math.sqrt
+
 //Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
 fun vzSimpleNumbers(x: Int, y: Int): Boolean
 {
@@ -31,6 +33,48 @@ fun foundDel(x: Int): Int {
     }
     return del
 }
+
+// ______________10______________ - Суммирование простых числе до 2 миллионов
+fun sumTwoMillionSimpleNumbers(beforeNumber: Int): Long
+{
+    val a = Array(beforeNumber + 1, {true})
+    val array = func(a, 1)
+    return sumTwoMillionSimpleNumbers(a, 1, 0)
+}
+
+tailrec fun changeArray(a: Array<Boolean>, step: Int, size: Int, i: Int): Array<Boolean> = if (step * step + step * i > (size - 1)) a else {
+    var ar = a
+    ar[step * step + step * i] = false
+    changeArray(ar, step, size, i + 1)
+}
+
+tailrec fun func(a: Array<Boolean>, step: Int): Array<Boolean> = if (existsSimpleNumbers(a) == false) a // если нет простых чисел
+else {
+    var newA = a
+    var newStep = step
+    loop@ for (i in 1 .. (a.size - 1))
+        if (a[i] == true && i > step) {
+            newStep = i
+            newA = changeArray(a, i, a.size, 0)
+            break@loop
+        }
+    func(newA, newStep)
+}
+
+fun existsSimpleNumbers(a: Array<Boolean>): Boolean {
+    for (i in 0 .. a.size - 1)
+        if (simpleNumber(i) == false && a[i] == true) return true
+    return false
+}
+fun simpleNumber(x: Int): Boolean = simpleNumber(x, 2, true)
+tailrec fun simpleNumber(x: Int, counter: Int, result: Boolean): Boolean = if (counter  > sqrt(x.toDouble())) result else {
+    if (x % counter == 0) simpleNumber(x,counter + 1, false) else
+        simpleNumber(x,counter + 1, result)
+}
+
+tailrec fun sumTwoMillionSimpleNumbers(a: Array<Boolean>, counter: Int, sum: Long): Long = if (counter + 1 > a.size) sum else
+    if (a[counter] == true) sumTwoMillionSimpleNumbers(a, counter + 1, sum + counter) else
+        sumTwoMillionSimpleNumbers(a, counter + 1, sum)
 
 fun main()
 {
