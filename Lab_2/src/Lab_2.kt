@@ -1,4 +1,5 @@
 import java.lang.IllegalArgumentException
+import kotlin.math.sqrt
 
 // ______________1______________
 fun sumNumberUp(x: Int): Int = if (x == 0) x else sumNumberUp(x/10) + x%10
@@ -97,10 +98,6 @@ fun splitN(n: Int, counter: Int): Int =
 fun delMillion(n: Int): Int = if (splitN(n) % 1000000 >= 1) n else delMillion(n + 1)
 
 fun main() {
-    //val num: Int = readLine()!!.toInt()
-    //val num2: Int = readLine()!!.toInt()
-    //val n = kolFoundelay(5,5,0)
-    println(splitN(20))
-    //println(kolFoundelay( 3))
-    //println(roundelay(readLine()!!.toInt(), readLine()!!.toInt()))
+    val n = readLine()!!.toInt()
+    //println(sumTwoMillionSimpleNumbers(n))
 }
