@@ -56,8 +56,6 @@ else sumNumbers3(x/10,sum))
 
 // _______________8.3_______________
 //Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
-
-
 tailrec fun kolVpSimpleNumbers(x: Int, y: Int, counter: Int): Int = if (x == 0) counter else
     ( if (vzSimpleNumbers(x % 10,y))
                  { val counter1 = 1 + counter
