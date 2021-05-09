@@ -1,12 +1,6 @@
 fun main()
 {
-    val n = readLine()!!.toInt()
-    var ar: Array<Int> = Array<Int>(n,{0})
-
-    arrayInput(ar,n)
-    ar.forEach{
-        print("$it ")
-    }
+    val ar = arrayOp()
     /*println(ar.min())
     println(ar.max())
     println(ar.sum())
@@ -14,9 +8,14 @@ fun main()
     println("умножение = ${arrayOp(ar.iterator(), {a,b -> a*b}, ar[0])}")
 
 }
+fun arrayOp(): Array<Int> {
+    print("введите размер массива: ")
+    var ar: Array<Int> = Array<Int>(readLine()!!.toInt(),{0})
+    return arrayInput(ar)
+}
 
-fun arrayInput(array : Array<Int>, size : Int) : Array<Int> =   // ввод массива с клавиатуры
-    arrayInput(array, 0, size)
+fun arrayInput(array : Array<Int>) : Array<Int> =   // ввод массива с клавиатуры
+    arrayInput(array, 0, array.size)
 tailrec fun arrayInput(array : Array<Int>, counter : Int, size : Int) : Array<Int> =
     if (counter == size) array else {
         array[counter] = readLine()!!.toInt()
