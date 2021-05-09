@@ -5,9 +5,17 @@ import kotlin.math.sqrt
 // _______________3_______________
 // val name = readLine()
 // println("Hello, $name")
-
 // _______________5_______________
+fun otvet(answer: String) =
+    when (answer) {
+        "Kotlin" -> println("Подлиза")
+        "Prolog" -> println("Подлиза")
+        "c++" -> println("а ты хорош")
+        "c" -> println("тебе может понравится епта скрипт")
+        "Haskell" -> println("мое уважение")
 
+        else -> "эх, языки учить нужно"
+    }
 // _______________6_______________
     /*var x: Int = readLine()!!.toInt()
     var sum = 0
@@ -123,5 +131,5 @@ tailrec fun sumTwoMillionSimpleNumbers(a: Array<Boolean>, counter: Int, sum: Lon
 
 fun main()
 {
-       println("Hello, world")
+       otvet(readLine()!!.toString())
 }
