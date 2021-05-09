@@ -86,7 +86,18 @@ fun foundDel(x: Int): Int {
     }
     return del
 }
-
+// ______________9______________
+fun workWithNumbers(methods: String) {
+    while (methods != "конец работы") {
+        when (methods) {
+            "произведение цифр" -> prNumber(readLine()!!.toInt())
+            "максимальная цирфа" -> max(readLine()!!.toInt())
+            "минимальная цифра" -> min(readLine()!!.toInt())
+            "cумма цифр, делящихся на 3" -> sumNumbers3(readLine()!!.toInt())
+            else -> "конец работы"
+        }
+    }
+}
 // ______________10______________ - Суммирование простых числе до 2 миллионов
 fun sumTwoMillionSimpleNumbers(beforeNumber: Int): Long
 {
@@ -131,5 +142,6 @@ tailrec fun sumTwoMillionSimpleNumbers(a: Array<Boolean>, counter: Int, sum: Lon
 
 fun main()
 {
-       otvet(readLine()!!.toString())
+    println(readLine())
+    println(readLine()!!.toString())
 }
