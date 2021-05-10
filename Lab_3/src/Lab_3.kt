@@ -57,19 +57,30 @@ fun getArray(): () -> Array<Int> =
 
 // 7 8 18 20 32 35 38 44 56
 //_________________7_________________ - циклический сдвиг вправо на 2 позиции
-fun cyclicShift(a: Array<Int>): List<Int>
+fun cyclicShift(a: List<Int>): List<Int>
 {
     val ar1 = a.drop(2)
     val ar2 = a.dropLast(2)
     val aNew = ar1 + ar2
     return aNew
 }
+//_________________8_________________ - нахождение индексов двух минимальных чисел списка
+fun index2minElements(a: MutableList<Int>) {
+    val list = a.toCollection(mutableListOf<Int>())  // копирование необходимо, так как при простом приравнивании не будет создаваться новый список, а лишь другое имя будет
+    val min1 = list.min()                            // указывать на тот же массив
+    val index1 = a.indexOf(min1)
+    while (list.contains(min1) == true)
+        list.remove(min1)
+    val min2 = list.min()
+    val index2 = a.indexOf(min2)
+    println("index1 = $index1")
+    println("index2 = $index2")
+}
 
 fun main()
 {
-    val a = readFromFile("source.txt")
-    val ar = cyclicShift(a)
-    //for (el in ar) print("$el  ")
+    val l = mutableListOf<Int>(1,45,7,8,23,14,5,32)
+    index2minElements(l)
 }
 
 
