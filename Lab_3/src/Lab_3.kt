@@ -36,7 +36,6 @@ fun readFromFile(path: String): Array<Int> {
         if (el.toInt() == 32) {
             val str = ar.subSequence(indexStart, indexEnd)
             if (flag == 0) {
-                println("size = $str")
                 array= Array(str.toString().toInt(),{0})
                 flag = 1
             } else {
@@ -56,12 +55,21 @@ fun getArray(): () -> Array<Int> =
         else -> { {arrayOp()} }
     }
 
+// 7 8 18 20 32 35 38 44 56
+//_________________7_________________ - циклический сдвиг вправо на 2 позиции
+fun cyclicShift(a: Array<Int>): List<Int>
+{
+    val ar1 = a.drop(2)
+    val ar2 = a.dropLast(2)
+    val aNew = ar1 + ar2
+    return aNew
+}
 
 fun main()
 {
-    println("Input from a file or from the keyboard?")
-    val a = getArray()()
-    for (el in a) print("$el  ")
+    val a = readFromFile("source.txt")
+    val ar = cyclicShift(a)
+    //for (el in ar) print("$el  ")
 }
 
 
