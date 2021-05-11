@@ -73,8 +73,8 @@ fun index2minElements(a: MutableList<Int>) {
         list.remove(min1)
     val min2 = list.min()
     val index2 = a.indexOf(min2)
-    println("index1 = $index1")
-    println("index2 = $index2")
+    println("index1 = ${index1 + 1} ")
+    println("index2 = ${index2 + 1}")
 }
 
 fun main()
