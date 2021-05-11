@@ -76,12 +76,22 @@ fun index2minElements(a: MutableList<Int>) {
     println("index1 = ${index1 + 1} ")
     println("index2 = ${index2 + 1}")
 }
+//_________________18_________________ - нахождение чисел до первого минимального
+fun elementsBeforeMin(a: MutableList<Int>) {
+    val min = a.min()
+    val index = a.indexOf(min)
+    val elementsBeforeMin = a.dropLast(a.size - index)
+    for (el in elementsBeforeMin)
+        print("$el  ")
+}
 
 fun main()
 {
-    val l = mutableListOf<Int>(1,45,7,8,23,14,5,32)
-    index2minElements(l)
+    val l = mutableListOf<Int>(3,45,7,8,1,14,5,32)
+    elementsBeforeMin(l)
+
 }
+
 
 
 
