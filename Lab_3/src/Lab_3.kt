@@ -1,5 +1,6 @@
 import java.io.File
 import java.io.BufferedReader
+import kotlin.math.abs
 
 // ________________1________________
 fun arrayOp(): Array<Int> {
@@ -108,10 +109,16 @@ fun kolLocMax(l: List<Int>, counter: Int, kol: Int): Int = if (counter + 1 > l.s
     if (l[counter - 1] < l[counter] && l[counter + 1] < l[counter]) kolLocMax(l,counter + 2, kol + 1)
         else kolLocMax(l,counter + 1, kol)
 
+//_________________32_________________ - Дано вещественное число R и массив вещественных чисел. Найти элемент массива, который наиболее близок к данному числу
+fun nearestNumber(l: List<Double>, r: Double) = nearestNumber(l, l[0],r,0)
+fun nearestNumber(l: List<Double>, nearestNumber: Double, r: Double, counter: Int): Double = if (l.size - 1 < counter) nearestNumber else
+    if (abs(l[counter] - r) < abs(nearestNumber - r)) nearestNumber(l, l[counter], r, counter + 1)
+        else nearestNumber(l,nearestNumber,r,counter + 1)
+
 fun main()
 {// 7 8 18 20 32 35 38 44 56
-    val l = mutableListOf<Int>(1,4,2,7,5,7,1,3,1)
-    print(kolLocMax(l))
+    val l = mutableListOf<Double>(1.1,2.1,3.5,3.66,2.45,1.01,5.05,5.45,5.001,5.015)
+    print(nearestNumber(l,5.1))
 }
 
 
