@@ -114,15 +114,24 @@ fun nearestNumber(l: List<Double>, r: Double) = nearestNumber(l, l[0],r,0)
 fun nearestNumber(l: List<Double>, nearestNumber: Double, r: Double, counter: Int): Double = if (l.size - 1 < counter) nearestNumber else
     if (abs(l[counter] - r) < abs(nearestNumber - r)) nearestNumber(l, l[counter], r, counter + 1)
         else nearestNumber(l,nearestNumber,r,counter + 1)
+
 //_________________38_________________ - Дан целочисленный массив и отрезок a..b. Необходимо найти количество элементов, значение которых принадлежит этому отрезку.
 fun kolElSegment(l: List<Int>, a: Int, b: Int) = kolElSegment(l, a, b, 0, 0)
 fun kolElSegment(l: List<Int>, a: Int, b: Int, counter: Int, kol: Int): Int = if (counter > l.size - 1) kol else
     if (l[counter] >= a && l[counter] <= b) kolElSegment(l,a,b,counter + 1, kol + 1)
         else kolElSegment(l,a,b,counter + 1, kol)
+
+//_________________44_________________ - Дан массив чисел. Необходимо проверить, чередуются ли в нем целые и вещественные числа.
+fun series(l: List<Double>): Boolean = series(l, 0, true)
+fun series(l: List<Double>, counter: Int, result: Boolean): Boolean = if (counter + 1 > l.size - 1) result else
+    if (l[counter] == l[counter].toInt().toDouble() && l[counter + 1] == l[counter + 1].toInt().toDouble()
+        || l[counter] != l[counter].toInt().toDouble() && l[counter + 1] != l[counter + 1].toInt().toDouble()) series(l, counter + 1, false)
+            else series(l, counter + 1, result)
+
 fun main()
 {// 7 8 18 20 32 35 38 44 56
-    val l = mutableListOf<Int>(1,8,9,5,2,45,23,84,21,13)
-    print(kolElSegment(l,5, 25))
+    val l = mutableListOf<Double>(2.1,3.0,5.4,53.0,8.1)
+    print(series(l))
 }
 
 
