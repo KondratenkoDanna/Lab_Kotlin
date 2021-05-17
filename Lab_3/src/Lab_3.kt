@@ -84,12 +84,34 @@ fun elementsBeforeMin(a: MutableList<Int>) {
     for (el in elementsBeforeMin)
         print("$el  ")
 }
+//_________________20_________________ - найти все пропущенные цифры
+fun missingNumbers(max: Int, l: List<Int>, counter: Int, lNew: List<Int>): List<Int> = if (counter == max) lNew else
+    if (l.contains(counter) == false){
+        print("$counter  --  ")
+        println("пропущенные цифры $lNew")
+        missingNumbers(max, l, counter + 1,lNew.plus(counter))
+    }
+        else missingNumbers(max, l, counter + 1, lNew)
+
+fun missingNumbers(l: List<Int>, missingNumders: List<Int>): List<Int> {
+    val min = l.min()!!.toInt()
+    val max = l.max()!!.toInt()
+
+    return missingNumbers(max,l,min + 1,missingNumders)
+}
+
+fun printList(l: List<Int>) = printList(l, 0)
+fun printList(l: List<Int>, counter: Int): List<Int> = if (counter + 1 > l.size) l else
+    if (l.size > counter) { print("${l[counter]}  ")
+    printList(l, counter + 1) } else
+        printList(l, counter + 1)
 
 fun main()
 {
-    val l = mutableListOf<Int>(3,45,7,8,1,14,5,32)
-    elementsBeforeMin(l)
-
+    val l = mutableListOf<Int>(1,4,5,7)
+    val missingNumders = mutableListOf<Int>()
+    println("before $l")
+    print("after ${missingNumbers(l,missingNumders)}")
 }
 
 
