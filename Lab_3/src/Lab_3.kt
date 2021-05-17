@@ -1,68 +1,63 @@
 import java.io.File
 import java.io.BufferedReader
 import kotlin.math.abs
+import kotlin.math.sqrt
 
 // ________________1________________
-fun arrayOp(): Array<Int> {
-    print("введите размер массива: ")
-    var ar: Array<Int> = Array<Int>(readLine()!!.toInt(),{0})
-    return arrayInput(ar)
+fun listOp(): List<Int> {
+    print("введите размер массива:  ")
+    val size = readLine()!!.toInt()
+    val l = mutableListOf<Int>()
+    return arrayInput(l, size)
 }
 
-fun arrayInput(array : Array<Int>) : Array<Int> =   // ввод массива с клавиатуры
-    arrayInput(array, 0, array.size)
-tailrec fun arrayInput(array : Array<Int>, counter : Int, size : Int) : Array<Int> =
-    if (counter == size) array else {
-        array[counter] = readLine()!!.toInt()
-        arrayInput(array, counter + 1, size)
-    }
+fun arrayInput(l : List<Int>, size: Int) : List<Int> =   // ввод массива с клавиатуры
+    arrayInput(l, 0, size)
+tailrec fun arrayInput(l : List<Int>, counter : Int, size : Int) : List<Int> =
+    if (counter == size) l else arrayInput(l.plus(readLine()!!.toInt()), counter + 1, size)
 
-tailrec fun arrayOp(a: Iterator<Int>, f: (Int, Int) -> Int, result: Int): Int =
+
+tailrec fun listOp(a: Iterator<Int>, f: (Int, Int) -> Int, result: Int): Int =
     if (a.iterator().hasNext() == false) result else
-        arrayOp(a, f, f(a.iterator().next(),result))
+        listOp(a, f, f(a.iterator().next(),result))
 
 // ________________3________________
-fun readFromFile(path: String): Array<Int> {
+fun readFromFile(path: String): List<Int> {
     val bufferedReader: BufferedReader = File(path).bufferedReader()
     val inputString = bufferedReader.use {
         it.readText()
     }
-    val ar = inputString.toString() + " "
+    val st = inputString + " "
     var i = 0
     var indexStart = 0
     var indexEnd = 0
     var flag = 0
-    var array: Array<Int> = arrayOf()
-    for(el in ar)
+    var l = mutableListOf<Int>()
+    for(el in st)
         if (el.toInt() == 32) {
-            val str = ar.subSequence(indexStart, indexEnd)
-            if (flag == 0) {
-                array= Array(str.toString().toInt(),{0})
-                flag = 1
-            } else {
-                array[i] = str.toString().toInt()
-                i++
-            }
+            val str = st.subSequence(indexStart, indexEnd)
+
+            l.plus(str.toString().toInt())
             indexEnd++
             indexStart = indexEnd
         }
         else indexEnd++
-    return array
+    return l
 }
-fun getArray(): () -> Array<Int> =
+fun getList(): () -> List<Int> =
     when (readLine()!!.toString()) {
         "file" -> { {readFromFile("source.txt")} }
-        "keyboard" -> { {arrayOp()} }
-        else -> { {arrayOp()} }
+        "keyboard" -> { {listOp()} }
+        else -> { {listOp()} }
     }
 
 //_________________7_________________ - циклический сдвиг вправо на 2 позиции
 fun cyclicShift(a: List<Int>): List<Int>
 {
-    val ar1 = a.drop(2)
-    val ar2 = a.dropLast(2)
-    val aNew = ar1 + ar2
-    return aNew
+    val l1 = a.drop(2)
+    val l2 = a.dropLast(2)
+    val lNew = l1 + l2
+    return lNew
 }
 //_________________8_________________ - нахождение индексов двух минимальных чисел списка
 fun index2minElements(a: MutableList<Int>) {
@@ -128,11 +123,35 @@ fun series(l: List<Double>, counter: Int, result: Boolean): Boolean = if (counte
         || l[counter] != l[counter].toInt().toDouble() && l[counter + 1] != l[counter + 1].toInt().toDouble()) series(l, counter + 1, false)
             else series(l, counter + 1, result)
 
-fun main()
-{// 7 8 18 20 32 35 38 44 56
-    val l = mutableListOf<Double>(2.1,3.0,5.4,53.0,8.1)
-    print(series(l))
+//_________________56_________________ - Для введенного списка посчитать среднее арифметическое непростых элементов, которые больше, чем среднее арифметическое простых.
+fun simpleNumber(x: Int): Boolean = simpleNumber(x, 2, true)
+tailrec fun simpleNumber(x: Int, counter: Int, result: Boolean): Boolean = if (counter  > sqrt(x.toDouble())) result else {
+    if (x % counter == 0) simpleNumber(x, counter + 1, false) else
+        simpleNumber(x, counter + 1, result)
 }
+
+fun arithmeticMeanSimple(l: List<Int>, sum: Double, kol: Double, counter: Int): Double = if (counter == l.size - 1) sum/kol else
+    if (simpleNumber(l[counter]) == true) arithmeticMeanSimple(l, sum + l[counter], kol + 1, counter + 1)
+        else arithmeticMeanSimple(l, sum, kol, counter + 1)
+
+fun arithmeticMeanNoSimple(l: List<Int>, sum: Double, kol: Double, counter: Int, arithmeticMeanSimple: Double): Double = if (counter == l.size) sum/kol else
+    if (simpleNumber(l[counter]) == false && l[counter] > arithmeticMeanSimple) {
+        arithmeticMeanNoSimple (l, sum+l[counter], kol+1, counter+1, arithmeticMeanSimple)
+    }  else arithmeticMeanNoSimple(l, sum, kol, counter + 1, arithmeticMeanSimple)
+
+fun task44(): Double {
+    val l = listOp()
+    val arithmeticMeanSimple = arithmeticMeanSimple(l,0.0,0.0,0)
+    return arithmeticMeanNoSimple(l, 0.0,0.0,0,arithmeticMeanSimple(l,0.0,0.0,0))
+}
+
+fun main() {
+    print(task44())
+
+    //print(arithmeticMeanNoSimple(l,0.0,0.0,0,arithmeticMeanSimple(l,0.0,0.0,0)))
+}
+
+
 
 
 
