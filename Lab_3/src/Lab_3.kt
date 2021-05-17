@@ -55,7 +55,6 @@ fun getArray(): () -> Array<Int> =
         else -> { {arrayOp()} }
     }
 
-// 7 8 18 20 32 35 38 44 56
 //_________________7_________________ - циклический сдвиг вправо на 2 позиции
 fun cyclicShift(a: List<Int>): List<Int>
 {
@@ -87,8 +86,6 @@ fun elementsBeforeMin(a: MutableList<Int>) {
 //_________________20_________________ - найти все пропущенные цифры
 fun missingNumbers(max: Int, l: List<Int>, counter: Int, lNew: List<Int>): List<Int> = if (counter == max) lNew else
     if (l.contains(counter) == false){
-        print("$counter  --  ")
-        println("пропущенные цифры $lNew")
         missingNumbers(max, l, counter + 1,lNew.plus(counter))
     }
         else missingNumbers(max, l, counter + 1, lNew)
@@ -105,13 +102,16 @@ fun printList(l: List<Int>, counter: Int): List<Int> = if (counter + 1 > l.size)
     if (l.size > counter) { print("${l[counter]}  ")
     printList(l, counter + 1) } else
         printList(l, counter + 1)
+//_________________32_________________ - найти количество локальных максимумов
+fun kolLocMax(l: List<Int>): Int = kolLocMax(l,1,0)
+fun kolLocMax(l: List<Int>, counter: Int, kol: Int): Int = if (counter + 1 > l.size - 1) kol else
+    if (l[counter - 1] < l[counter] && l[counter + 1] < l[counter]) kolLocMax(l,counter + 2, kol + 1)
+        else kolLocMax(l,counter + 1, kol)
 
 fun main()
-{
-    val l = mutableListOf<Int>(1,4,5,7)
-    val missingNumders = mutableListOf<Int>()
-    println("before $l")
-    print("after ${missingNumbers(l,missingNumders)}")
+{// 7 8 18 20 32 35 38 44 56
+    val l = mutableListOf<Int>(1,4,2,7,5,7,1,3,1)
+    print(kolLocMax(l))
 }
 
 
