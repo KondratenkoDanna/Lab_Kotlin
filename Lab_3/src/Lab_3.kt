@@ -5,16 +5,16 @@ import kotlin.math.sqrt
 
 // ________________1________________
 fun listOp(): List<Int> {
-    print("введите размер массива:  ")
+    print("введите размер списка:  ")
     val size = readLine()!!.toInt()
     val l = mutableListOf<Int>()
-    return arrayInput(l, size)
+    return listInput(l, size)
 }
 
-fun arrayInput(l : List<Int>, size: Int) : List<Int> =   // ввод массива с клавиатуры
-    arrayInput(l, 0, size)
-tailrec fun arrayInput(l : List<Int>, counter : Int, size : Int) : List<Int> =
-    if (counter == size) l else arrayInput(l.plus(readLine()!!.toInt()), counter + 1, size)
+fun listInput(l : List<Int>, size: Int) : List<Int> =   // ввод массива с клавиатуры
+    listInput(l, 0, size)
+tailrec fun listInput(l : List<Int>, counter : Int, size : Int) : List<Int> =
+    if (counter == size) l else listInput(l.plus(readLine()!!.toInt()), counter + 1, size)
 
 
 tailrec fun listOp(a: Iterator<Int>, f: (Int, Int) -> Int, result: Int): Int =
@@ -146,9 +146,8 @@ fun task44(): Double {
 }
 
 fun main() {
-    print(task44())
-
-    //print(arithmeticMeanNoSimple(l,0.0,0.0,0,arithmeticMeanSimple(l,0.0,0.0,0)))
+    val l = listOf(1,2,3)
+    print(listOp(l.iterator(),{a,b -> a+b},0))
 }
 
 
