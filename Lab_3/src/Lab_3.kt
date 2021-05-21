@@ -33,17 +33,18 @@ fun readFromFile(path: String): List<Int> {
     var indexEnd = 0
     var flag = 0
     var l = mutableListOf<Int>()
-    for(el in st)
-        if (el.toInt() == 32) {
-            val str = st.subSequence(indexStart, indexEnd)
 
-            l.plus(str.toString().toInt())
-            indexEnd++
-            indexStart = indexEnd
-        }
-        else indexEnd++
-    return l
+    return read(indexStart, indexEnd, st,l)
 }
+
+fun read(indexStart: Int, indexEnd: Int, s: String, l: MutableList<Int>): MutableList<Int> = if (indexEnd == s.length) l else
+    if (s[indexEnd].toInt() == 32)
+    {
+        val str = s.subSequence(indexStart, indexEnd)
+        read(indexEnd, indexEnd + 1, s, l.plus(str.toString().toInt()).toMutableList())
+    }
+            else read(indexStart, indexEnd + 1, s, l)
+
 fun getList(): () -> List<Int> =
     when (readLine()!!.toString()) {
         "file" -> { {readFromFile("source.txt")} }
