@@ -144,10 +144,25 @@ fun task44(): Double {
     val arithmeticMeanSimple = arithmeticMeanSimple(l,0.0,0.0,0)
     return arithmeticMeanNoSimple(l, 0.0,0.0,0,arithmeticMeanSimple(l,0.0,0.0,0))
 }
+//_____________________9_____________________
+fun makeList(): List<Double> {
+    val l: MutableList<Double> = mutableListOf()
+    return makeList(0.1,l,0).toList()
+}
+
+tailrec fun makeList(startEl: Double, l: MutableList<Double>, counter: Int): List<Double> = if (counter == 100000001) l else {
+    makeList(startEl + 1, l.plus(startEl + 1).toMutableList(), counter + 1)
+}
 
 fun main() {
-    val l = listOf(1,2,3)
-    print(listOp(l.iterator(),{a,b -> a+b},0))
+    val startTime = System.currentTimeMillis()
+    print("lop")
+    val l = makeList()
+    l.binarySearch { 4514122 }
+    val totalTime = System.currentTimeMillis()
+    println("Время в списке: $totalTime")
+    //val a = arrayOf()
+    //print(a[10])
 }
 
 
