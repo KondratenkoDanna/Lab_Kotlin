@@ -60,16 +60,18 @@ fun cyclicShift(a: List<Int>): List<Int>
     return lNew
 }
 //_________________8_________________ - нахождение индексов двух минимальных чисел списка
-fun index2minElements(a: MutableList<Int>) {
+fun index2min(l: MutableList<Int>) {
+    index2minElements(index2minElements(l,l.min()!!),index2minElements(l,l.min()!!).min()!!)
+}
+
+fun index2minElements(a: MutableList<Int>, min: Int): MutableList<Int> {
     val list = a.toCollection(mutableListOf<Int>())  // копирование необходимо, так как при простом приравнивании не будет создаваться новый список, а лишь другое имя будет
     val min1 = list.min()                            // указывать на тот же массив
     val index1 = a.indexOf(min1)
-    while (list.contains(min1) == true)
-        list.remove(min1)
-    val min2 = list.min()
-    val index2 = a.indexOf(min2)
-    println("index1 = ${index1 + 1} ")
-    println("index2 = ${index2 + 1}")
+    list.remove(min1)
+    if (list.contains(min1) == true)
+        return index2minElements(list,min)
+    else return list
 }
 //_________________18_________________ - нахождение чисел до первого минимального
 fun elementsBeforeMin(a: MutableList<Int>) {
