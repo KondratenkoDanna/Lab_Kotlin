@@ -153,19 +153,22 @@ fun makeList(): List<Double> {
     return makeList(0.1,l,0).toList()
 }
 
-tailrec fun makeList(startEl: Double, l: MutableList<Double>, counter: Int): List<Double> = if (counter == 100000001) l else {
+tailrec fun makeList(startEl: Double, l: MutableList<Double>, counter: Int): List<Double> = if (counter == 100000) l else {
+    println(counter)
     makeList(startEl + 1, l.plus(startEl + 1).toMutableList(), counter + 1)
 }
 
 fun main() {
-    val startTime = System.currentTimeMillis()
-    print("lop")
     val l = makeList()
-    l.binarySearch { 4514122 }
+    val startTime = System.currentTimeMillis()
+    l.binarySearch { 5555 }
     val totalTime = System.currentTimeMillis()
-    println("Время в списке: $totalTime")
-    //val a = arrayOf()
-    //print(a[10])
+    println("Время в списке: ${(totalTime - startTime)}")
+    val a = Array(100000,{i -> i + 1})
+    val startTime1 = System.currentTimeMillis()
+    a.binarySearch(5555)
+    val totalTime1 = System.currentTimeMillis()///1000/60
+    println("Время в массиве: ${(totalTime1 - startTime1)}")
 }
 
 
