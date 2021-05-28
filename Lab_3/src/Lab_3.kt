@@ -153,9 +153,20 @@ fun makeList(): List<Double> {
     return makeList(0.1,l,0).toList()
 }
 
-tailrec fun makeList(startEl: Double, l: MutableList<Double>, counter: Int): List<Double> = if (counter == 100000) l else {
-    println(counter)
+tailrec fun makeList(startEl: Double, l: MutableList<Double>, counter: Int): List<Double> = if (counter == 100) l else {
+    //println(counter)
     makeList(startEl + 1, l.plus(startEl + 1).toMutableList(), counter + 1)
+}
+
+fun makeSet(): Set<Double> {
+    val set = mutableSetOf<Double>()
+    return makeSet(0.1, set, 0)
+}
+
+tailrec fun makeSet(startEl: Double, set: MutableSet<Double>, counter: Int): Set<Double> = if (counter == 100) set else {
+    //println(counter)
+    set.add(startEl + 1)
+    makeSet(startEl + 1, set, counter + 1)
 }
 
 fun main() {
@@ -164,11 +175,16 @@ fun main() {
     l.binarySearch { 5555 }
     val totalTime = System.currentTimeMillis()
     println("Время в списке: ${(totalTime - startTime)}")
-    val a = Array(100000,{i -> i + 1})
+    val a = Array(100,{i -> i + 1})
     val startTime1 = System.currentTimeMillis()
     a.binarySearch(5555)
     val totalTime1 = System.currentTimeMillis()///1000/60
     println("Время в массиве: ${(totalTime1 - startTime1)}")
+
+    val set = makeSet()
+    println(set.binarySearch(5))
+    //val l1 = getList()
+    //l1().contains(Int.MIN_VALUE).xor(true).toString()[0]
 }
 
 
